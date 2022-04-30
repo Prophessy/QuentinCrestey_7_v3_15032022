@@ -14,6 +14,9 @@ const db = require('./models');
 const postRouter = require('./routes/Posts');
 app.use("/posts", postRouter);
 
+const commentsRouter = require('./routes/Comments');
+app.use("/comments", commentsRouter);
+
 //Démarrage du serveur avec un console.log pour confirmer que le serveur fonctionne
 //Utilisation de sequelize pour écrire les données dans mysql
 
