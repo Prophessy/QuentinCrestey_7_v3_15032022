@@ -19,7 +19,7 @@ function Home() {
   return (
     <div>
         { listOfPosts.map((value, key) => {
-        return <div className='post' onClick={() => {navigate(`/post/${value.id}`)}}>
+        return <div className='post'  key={key} onClick={() => {navigate(`/post/${value.id}`)}}>
           <div className='title'> { value.title } </div>
           <div className='body'> { value.postText } </div>
           <div className='footer'> { value.username } </div>
