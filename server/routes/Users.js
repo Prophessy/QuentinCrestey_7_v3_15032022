@@ -8,6 +8,14 @@ const router = express.Router();
 
 const bcrypt = require('bcrypt');
 
+//On appelle validateToken pour vérifier que le token est bon pour pas que les utilisateurs puissent envoyer un faux token
+
+const { validateToken } = require('../middlewares/AuthMiddleware')
+
+//On appelle Json Web Token pour sécuriser l'authentification
+
+const { sign } = require('jsonwebtoken');
+
 //On récupérer une instance du models  posts 
 
 const { Users } = require("../models");
@@ -36,8 +44,13 @@ router.post('/login', async (req, res) => {
     bcrypt.compare(password, user.password).then((match) => {
         if (!match) res.json({error: "Mot de passe incorrect"});
 
-        res.json("Tu es connecté")
+        const accessToken = sign({username: user.username, id: user.id}, "importantsecret");
+        res.json({token: accessToken, username: username, id: user.id});
     });
+});
+
+router.get('/auth', validateToken, (req, res) => {
+    res.json(req.user);
 });
 
 module.exports = router;
