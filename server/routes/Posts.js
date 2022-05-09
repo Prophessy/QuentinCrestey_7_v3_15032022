@@ -6,13 +6,18 @@ const router = express.Router();
 
 //On récupérer une instance du models  posts 
 
-const { Posts } = require("../models");
+const { Posts, Likes } = require("../models");
+
+
+const { validateToken } = require('../middlewares/AuthMiddleware');
 
 //Récupérer les informations de notre database
 
-router.get('/', async (req, res) => {
-    const listOfPosts = await Posts.findAll();
-    res.json(listOfPosts);
+router.get('/', validateToken, async (req, res) => {
+    const listOfPosts = await Posts.findAll({include: [Likes]});
+
+    const likedPosts = await Likes.findAll({where: { UserId: req.user.id }});
+    res.json({ listOfPosts: listOfPosts, likedPosts: likedPosts});
 });
 
 router.get('/byId/:id', async (req,res) => {

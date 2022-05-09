@@ -7,6 +7,7 @@ import CreatePost from "./pages/CreatePost";
 import Post from "./pages/Post";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
+import PageNotFound from "./pages/PageNotFound"
 import { AuthContext } from "./helpers/AuthContext";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -16,9 +17,10 @@ function App() {
   const [authState, setAuthState] = useState({user: "", id: 0, status: false});
 
   useEffect(() => {
+
     axios.get('http://localhost:3001/auth/auth', { headers: {
       accessToken: localStorage.getItem('acessToken'),
-    } }).then((reponse) => {
+    } }).then((response) => {
       if (response.data.error) {
         setAuthState({...authState, status: false});
       } 
@@ -37,19 +39,21 @@ function App() {
     <div className="App">
       <AuthContext.Provider value={{authState, setAuthState}}>
         <Router>
-          <div className='navbar'>
-            <Link to="/createpost">Créer un post</Link>
-            <Link to="/">Page d'accueil</Link>
-            {!authState.status ? (
-              <>
-              <Link to="/login">Se connecter</Link>
-              <Link to="/registration">Créer un compte</Link>
-              </>
-            ) : (
-              <button onClick={logout}> Logout </button>
-            )}
-
-
+        <div className="navbar">
+            <div className="links">
+              <Link to="/"> Page d'accueil</Link>
+              <Link to="/createpost"> Créer un post</Link>
+              {!authState.status && (
+                <>
+                  <Link to="/login"> Connexion</Link>
+                  <Link to="/registration"> S'inscrire</Link>
+                </>
+              )}
+            </div>
+            <div className="loggedInContainer">
+              <h1>{authState.username} </h1>
+              {authState.status && <button onClick={logout}> Deconnexion</button>}
+            </div>
           </div>
           <Routes>
             <Route path="/" exact element={ <Home /> } />
@@ -57,6 +61,7 @@ function App() {
             <Route path="/post/:id" exact element={ <Post /> } />
             <Route path="/login" exact element={ <Login /> } />
             <Route path="/registration" exact element={ <Registration /> } />
+            <Route path="*" exact element={ <PageNotFound /> } />
           </Routes>
         </Router>
       </AuthContext.Provider>

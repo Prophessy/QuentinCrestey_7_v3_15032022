@@ -35,7 +35,7 @@ function Post() {
         else {
           const commentToAdd = { commentBody: newComment, username: response.data.username };
           setComments([...comments, commentToAdd]);
-          setComments("");
+          setNewComment("");
         }
       });
     };

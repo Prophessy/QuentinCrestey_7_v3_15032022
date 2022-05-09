@@ -1,3 +1,3 @@
-import { createContext } from 'reac'
+import { createContext } from 'react'
 
 export const AuthContext = createContext("");

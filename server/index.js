@@ -20,6 +20,9 @@ app.use("/comments", commentsRouter);
 const usersRouter = require('./routes/Users');
 app.use("/auth", usersRouter);
 
+const likesRouter = require('./routes/Likes');
+app.use("/likes", likesRouter);
+
 //Démarrage du serveur avec un console.log pour confirmer que le serveur fonctionne
 //Utilisation de sequelize pour écrire les données dans mysql
 
