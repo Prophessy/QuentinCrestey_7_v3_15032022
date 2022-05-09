@@ -14,25 +14,25 @@ import axios from 'axios';
 
 function App() {
 
-  const [authState, setAuthState] = useState({user: "", id: 0, status: false});
+  const [authState, setAuthState] = useState({username: "", id: 0, status: false});
 
   useEffect(() => {
 
     axios.get('http://localhost:3001/auth/auth', { headers: {
-      accessToken: localStorage.getItem('acessToken'),
+      accessToken: localStorage.getItem('accessToken'),
     } }).then((response) => {
       if (response.data.error) {
         setAuthState({...authState, status: false});
       } 
       else {
-        setAuthState({user: response.data.username, id: response.data.id, status: true});
+        setAuthState({username: response.data.username, id: response.data.id, status: true});
       }
     });
   }, []);
 
     const logout = () => {
       localStorage.removeItem("accessToken");
-      setAuthState({user: "", id: 0, status: false});
+      setAuthState({username: "", id: 0, status: false});
     };
 
   return (
@@ -41,12 +41,15 @@ function App() {
         <Router>
         <div className="navbar">
             <div className="links">
-              <Link to="/"> Page d'accueil</Link>
-              <Link to="/createpost"> Créer un post</Link>
-              {!authState.status && (
+              {!authState.status ? (
                 <>
                   <Link to="/login"> Connexion</Link>
                   <Link to="/registration"> S'inscrire</Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/"> Page d'accueil</Link>
+                  <Link to="/createpost"> Créer un post</Link>
                 </>
               )}
             </div>

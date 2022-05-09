@@ -1,31 +1,37 @@
 //Utilisation de formik qui est une api de création de form
 //On complète formik avec yup qui permet de gérer les "regex"
 
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../helpers/AuthContext'
 
 function CreatePost() {
 
+    const {authState} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const initialValues = {
         title: "",
         postText: "",  
-        username: "",
     };
+
+    useEffect(() => {
+        if(!localStorage.getItem('accessToken')) {
+            navigate('/');
+        }
+    }, []);
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required("Vous devez mettre un titre"),
         postText: Yup.string().required("Vous devez mettre une description"),
-        username: Yup.string().min(3).max(15).required("Vous devez mettre un pseudo"),
     });
 
     const onSubmit = (data) => {
-        axios.post("http://localhost:3001/posts", data).then((response) => {
-        navigate('/');
+        axios.post("http://localhost:3001/posts", data, { headers: {accessToken: localStorage.getItem('accessToken')} }).then((response) => {
+            navigate('/');
         });
     };
 
@@ -39,9 +45,6 @@ function CreatePost() {
                 <label>Post: </label>
                 <ErrorMessage name='postText' component="span"/>
                 <Field id="inputCreatePost" name="postText" placeholder="Description.."/>
-                <label>Username: </label>
-                <ErrorMessage name='username' component="span"/>
-                <Field id="inputCreatePost" name="username" placeholder="Zebi"/>
                 <button type='submit'>Envoyer</button>
             </Form>
         </Formik>
