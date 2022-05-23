@@ -13,11 +13,11 @@ function Post() {
     const {authState} = useContext(AuthContext);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
+         axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
           setPostObject(response.data);
         });
 
-        axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+         axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
           setComments(response.data);
         });
       }, []);
@@ -37,6 +37,9 @@ function Post() {
           const commentToAdd = { commentBody: newComment, username: response.data.username };
           setComments([...comments, commentToAdd]);
           setNewComment("");
+          axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+          setComments(response.data);
+        });
         }
       });
     };

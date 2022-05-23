@@ -26,12 +26,19 @@ router.get('/byId/:id', async (req,res) => {
     res.json(post);
 });
 
+router.get('/byUserId/:id', async (req,res) => {
+    const id = req.params.id
+    const listOfPosts = await Posts.findAll({where: {UserId: id}, include: [Likes],});
+    res.json(listOfPosts);
+});
+
 //Insérer des informations dans notre database
 //On fait une requête post à notre route post, ensuite on récupère les post data du body qui est envoyé dans la requête, ensuite on appelle la fonction sequalize create qui va insérer les données dans notre base mysql et pour finir on renvoi en tant que réponse les mêmes data qu'on a envoyé pour avoir une confirmation visuelle
 
 router.post("/", validateToken, async (req, res) => {
     const post = req.body;
     post.username = req.user.username;
+    post.UserId = req.user.id;
     await Posts.create(post);
     res.json(post);
 });
