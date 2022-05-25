@@ -43,7 +43,7 @@ function Login() {
                 <Field id="inputCreatePost" name="username" placeholder="Username.."/>
                 <label>Password: </label>
                 <ErrorMessage name='password' component="span"/>
-                <Field id="inputCreatePost" name="password" placeholder="Password.."/>
+                <Field id="inputCreatePost" type="password" name="password" placeholder="Password.."/>
                 <button type='submit'>Se connecter</button>
             </Form>
         </Formik>
