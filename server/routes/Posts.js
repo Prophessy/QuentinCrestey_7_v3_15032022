@@ -18,7 +18,7 @@ const { validateToken } = require('../middlewares/AuthMiddleware');
 //Récupérer les informations de notre database
 
 router.get('/', validateToken, async (req, res) => {
-    const listOfPosts = await Posts.findAll({include: [Likes]});
+    const listOfPosts = await Posts.findAll({include: [Likes], order: [["createdAt", "DESC"]]});
 
     const likedPosts = await Likes.findAll({where: { UserId: req.user.id }});
     res.json({ listOfPosts: listOfPosts, likedPosts: likedPosts});
@@ -45,6 +45,7 @@ router.post("/", validateToken, multer, async (req, res) => {
     post.UserId = req.user.id;
     await Posts.create(post);
     res.json(post);
+    console.log(post);
 });
 
 router.put("/title", validateToken, async (req, res) => {

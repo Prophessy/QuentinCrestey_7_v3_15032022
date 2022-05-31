@@ -50,6 +50,7 @@ function Post() {
       setComments(comments.filter((val) => {
         return val.id != id;
       }))
+      console.log(authState);
     });
     };
 
@@ -87,7 +88,7 @@ function Post() {
                   editPost("body");
                 }
                 }} >{postObject.postText}</div>
-              <div className='footer'>{postObject.username} {authState.username === postObject.username && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>)} </div>
+              <div className='footer'>{postObject.username} {authState.username === postObject.username && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>) || authState.username === "Admin" && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>)} </div>
             </div>
           </div>
           <div className='rightSide'>
@@ -100,7 +101,7 @@ function Post() {
                 return (
                 <div className='comment' key={key}> { comment.commentBody } 
                   <label>Username: {comment.username}</label>
-                  {authState.username === comment.username && <button onClick={() => {deleteComment(comment.id)}}> Supprimer </button>}
+                  {authState.username === comment.username && (<button onClick={() => {deleteComment(comment.id)}}> Supprimer </button>) || authState.username === "Admin" && (<button onClick={() => {deleteComment(comment.id)}}> Supprimer </button>)}
                 </div>
                 );
               })}
