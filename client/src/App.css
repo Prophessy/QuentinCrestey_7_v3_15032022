@@ -206,6 +206,12 @@ a {
   place-items: center;
 }
 
+.leftSide .icone-modif {
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
 .rightSide {
   flex: 50%;
   height: calc(100vh - 70px);

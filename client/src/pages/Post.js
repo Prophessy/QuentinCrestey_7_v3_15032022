@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../helpers/AuthContext'
 import { Image } from 'cloudinary-react'
+import EditIcon from '@material-ui/icons/Edit';
 
 
 function Post() {
@@ -79,16 +80,16 @@ function Post() {
         <div className='postPage'>
           <div className='leftSide'>
             <div className='post' id='individual'>
-              <div className='title' onClick={() => {
+              <div className='title'>{postObject.title} {(authState.username === postObject.username) && <EditIcon className='icone-modif' onClick={() => {
                 if (authState.username === postObject.username){
                   editPost("title");
                 }
-               }} >{postObject.title}</div>
-              <div className='body' onClick={() => {
+               }}/>}</div>
+              <div className='body'>{postObject.postText} {(authState.username === postObject.username) && <EditIcon className='icone-modif' onClick={() => {
                 if (authState.username === postObject.username){
                   editPost("body");
                 }
-                }} >{postObject.postText}</div>
+                }}/>}</div>
                 <div className='image'><Image cloudName="prophessy" publicId={postObject.image}/></div>
               <div className='footer'>{postObject.username} {(authState.username === postObject.username) && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>) || (authState.username === "Admin") && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>)} </div>
             </div>
