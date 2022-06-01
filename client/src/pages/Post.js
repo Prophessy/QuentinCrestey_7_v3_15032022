@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../helpers/AuthContext'
+import { Image } from 'cloudinary-react'
 
 
 function Post() {
@@ -88,7 +89,8 @@ function Post() {
                   editPost("body");
                 }
                 }} >{postObject.postText}</div>
-              <div className='footer'>{postObject.username} {authState.username === postObject.username && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>) || authState.username === "Admin" && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>)} </div>
+                <div className='image'><Image cloudName="prophessy" publicId={postObject.image}/></div>
+              <div className='footer'>{postObject.username} {(authState.username === postObject.username) && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>) || (authState.username === "Admin") && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>)} </div>
             </div>
           </div>
           <div className='rightSide'>
@@ -100,7 +102,7 @@ function Post() {
               {comments.map((comment, key) => {
                 return (
                 <div className='comment' key={key}> { comment.commentBody } 
-                  <label>Username: {comment.username}</label>
+                  <label><br></br><br></br>Auteur: {comment.username}</label>
                   {authState.username === comment.username && (<button onClick={() => {deleteComment(comment.id)}}> Supprimer </button>) || authState.username === "Admin" && (<button onClick={() => {deleteComment(comment.id)}}> Supprimer </button>)}
                 </div>
                 );

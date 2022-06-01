@@ -1,9 +1,17 @@
+* {
+  --primaire: #FD2D01;
+  --secondaire: #FFD7D7;
+  --tertiaire: #4E5166;
+  font-family: 'Lato', sans-serif;
+}
+
 .App {
   width: 100%;
   height: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: var(--secondaire);
 }
 
 body {
@@ -19,7 +27,6 @@ body {
   flex-direction: column;
   margin-top: 50px;
   border: 1px solid lightgray;
-  font-family: Arial, Helvetica, sans-serif;
 
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -31,10 +38,12 @@ body {
 .post .title {
   flex: 20%;
   border-bottom: 1px solid lightgray;
-  background-color: dodgerblue;
+  background-color: var(--primaire);
   display: grid;
   place-content: center;
   color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .post .image {
@@ -53,6 +62,7 @@ body {
   flex: 60%;
   display: grid;
   place-content: center;
+  background-color: white;
 }
 
 .post .footer {
@@ -61,7 +71,7 @@ body {
   display: flex;
   align-items: center;
   padding-left: 15px;
-  background-color: dodgerblue;
+  background-color: var(--primaire);
   color: white;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -92,7 +102,6 @@ body {
 /* CREATE POST PAGE CSS */
 
 .createPostPage {
-  font-family: Arial, Helvetica, sans-serif;
   width: 100vw;
   height: 70vh;
   display: flex;
@@ -143,10 +152,9 @@ span {
 .navbar {
   width: 100%;
   height: 70px;
-  background-color: dodgerblue;
+  background-color: var(--tertiaire);
   display: flex;
   align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
 }
 .navbar .links {
   flex: 50%;
@@ -224,12 +232,12 @@ button {
 }
 
 .addCommentContainer button {
-  background-color: dodgerblue;
+  background-color: var(--primaire);
   color: white;
 }
 
 .addCommentContainer input {
-  border: 2px solid dodgerblue;
+  border: 2px solid var(--primaire);
 }
 
 .rightSide .listOfComments {
@@ -244,9 +252,10 @@ button {
   width: 70%;
   height: auto;
   padding: 30px;
-  border: 1px solid lightgray;
+  border: 1px solid var(--tertiaire);
   border-radius: 5px;
   margin-top: 20px;
+  background-color: white;
 }
 
 #individual {
