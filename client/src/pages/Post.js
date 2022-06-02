@@ -80,16 +80,10 @@ function Post() {
         <div className='postPage'>
           <div className='leftSide'>
             <div className='post' id='individual'>
-              <div className='title'>{postObject.title} {(authState.username === postObject.username) && <EditIcon className='icone-modif' onClick={() => {
-                if (authState.username === postObject.username){
-                  editPost("title");
-                }
-               }}/>}</div>
-              <div className='body'>{postObject.postText} {(authState.username === postObject.username) && <EditIcon className='icone-modif' onClick={() => {
-                if (authState.username === postObject.username){
-                  editPost("body");
-                }
-                }}/>}</div>
+              <div className='title'>{postObject.title} {(authState.username === postObject.username) && <EditIcon className='icone-modif' onClick={() => {editPost("title");}}/>
+              || (authState.username === "Admin") && <EditIcon className='icone-modif' onClick={() => {editPost("title");}}/>}</div>
+              <div className='body'>{postObject.postText} {(authState.username === postObject.username) && <EditIcon className='icone-modif' onClick={() => {editPost("body");}}/>
+              || (authState.username === "Admin") && <EditIcon className='icone-modif' onClick={() => {editPost("body");}}/>}</div>
                 <div className='image'><Image cloudName="prophessy" publicId={postObject.image}/></div>
               <div className='footer'>{postObject.username} {(authState.username === postObject.username) && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>) || (authState.username === "Admin") && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>)} </div>
             </div>
