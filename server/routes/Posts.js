@@ -56,6 +56,12 @@ router.put("/postText", validateToken, async (req, res) => {
     res.json(newText);
 });
 
+router.put("/image", validateToken, async (req, res) => {
+    const {newImage, id} = req.body;
+    await Posts.update({image: newImage}, {where: {id: id}})
+    res.json(newImage);
+});
+
 router.delete("/:postId", validateToken, async (req, res) => {
     const postId = req.params.postId;
     await Posts.destroy({

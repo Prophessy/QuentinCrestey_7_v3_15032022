@@ -80,12 +80,12 @@ function Post() {
         <div className='postPage'>
           <div className='leftSide'>
             <div className='post' id='individual'>
-              <div className='title'>{postObject.title} {(authState.username === postObject.username) && <EditIcon className='icone-modif' onClick={() => {editPost("title");}}/>
-              || (authState.username === "Admin") && <EditIcon className='icone-modif' onClick={() => {editPost("title");}}/>}</div>
+              <div className='title'>{postObject.title} {(authState.username === postObject.username) && <EditIcon className='icone-modif' onClick={() => {navigate(`/post/${id}`)}}/>
+              || (authState.username === "Admin") && <EditIcon className='icone-modif' onClick={() => {navigate(`/changepost/${id}`)}}/>}</div>
               <div className='body'>{postObject.postText} {(authState.username === postObject.username) && <EditIcon className='icone-modif' onClick={() => {editPost("body");}}/>
               || (authState.username === "Admin") && <EditIcon className='icone-modif' onClick={() => {editPost("body");}}/>}</div>
                 <div className='image'><Image cloudName="prophessy" publicId={postObject.image}/></div>
-              <div className='footer'>{postObject.username} {(authState.username === postObject.username) && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>) || (authState.username === "Admin") && (<button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button>)} </div>
+              <div className='footer'>{postObject.username} {(authState.username === postObject.username) && (<div><button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button> <button onClick={() => {navigate(`/changepost/${id}`)}}>Modifier le post</button></div>) || (authState.username === "Admin") && (<div><button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button> <button onClick={() => {navigate(`/changepost/${id}`)}}>Modifier le post</button></div>)} </div>
             </div>
           </div>
           <div className='rightSide'>
@@ -98,7 +98,7 @@ function Post() {
                 return (
                 <div className='comment' key={key}> { comment.commentBody } 
                   <label><br></br><br></br>Auteur: {comment.username}</label>
-                  {authState.username === comment.username && (<button onClick={() => {deleteComment(comment.id)}}> Supprimer </button>) || authState.username === "Admin" && (<button onClick={() => {deleteComment(comment.id)}}> Supprimer </button>)}
+                  {authState.username === comment.username && (<button onClick={() => {deleteComment(comment.id)}}> Supprimer </button>)  || authState.username === "Admin" && (<button onClick={() => {deleteComment(comment.id)}}> Supprimer </button>)}
                 </div>
                 );
               })}
