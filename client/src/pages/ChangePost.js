@@ -12,15 +12,10 @@ function ChangePost() {
     const [image, setImage] = useState([]);
     const [postObject, setPostObject] = useState({});
 
-    const initialValues = {
-        title: "",
-        postText: "",
-        image: null,
-    };
-
     useEffect(() => {
         axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
          setPostObject(response.data);
+         console.log(postObject.title)
        });
      }, []);
 
@@ -29,6 +24,12 @@ function ChangePost() {
             navigate('/');
         }
     }, []);
+
+    const initialValues = {
+        title: `${postObject.title}`,
+        postText: `${postObject.postText}`,
+        image: null,
+    };
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required("Vous devez mettre un titre"),
@@ -58,7 +59,7 @@ function ChangePost() {
 
   return (
     <div className='createPostPage'>
-        <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+        <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} enableReinitialize ="true">
             <Form className='formContainer'>
                 <label>Titre: </label>
                 <ErrorMessage name='title' component="span"/>

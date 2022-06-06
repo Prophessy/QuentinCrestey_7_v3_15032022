@@ -29,7 +29,6 @@ function App() {
       } 
       else {
         setAuthState({username: response.data.username, id: response.data.id, status: true, right: response.data.right});
-        console.log(response.data);
       }
     });
   }, []);

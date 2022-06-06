@@ -69,7 +69,7 @@ function Home() {
           <div className='body' onClick={() => {navigate(`/post/${value.id}`)}}> { value.postText } </div>
           <div className='image' onClick={() => {navigate(`/post/${value.id}`)}}> <Image cloudName="prophessy" publicId={value.image} /> </div>
           <div className='footer'> 
-            <div className='username'><Link to={`/profile/${value.UserId}`}>{ value.username }</Link></div>
+            <div className='username'><Link to={`/profile/${value.UserId}`}>{ value.username } - Accéder au profil</Link></div>
             <div className='buttons'><ThumbUpAltIcon onClick={() => {likeAPost(value.id)}} className={likedPosts.includes(value.id) ? "unlikeBttn" : "likeBttn"}/><label> {value.Likes.length} </label></div>
           </div>
         </div>
