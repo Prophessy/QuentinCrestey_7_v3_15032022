@@ -304,3 +304,25 @@ button {
 .loginContainer input {
   border: 2px solid dodgerblue;
 }
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 600px) {
+  .post {
+    width: 300px;
+    height: 300px;
+  }
+  .post .image {
+    height: 150px;
+  }
+  #individual {
+    height: 300px;
+    width: 300px;
+  }
+  .formContainer {
+    width: 300px;
+  }
+  .postPage {
+    flex-direction: column;
+  }
+}

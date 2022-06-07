@@ -3,8 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../helpers/AuthContext'
 import { Image } from 'cloudinary-react'
-import EditIcon from '@material-ui/icons/Edit';
-
 
 function Post() {
     const navigate = useNavigate();
@@ -61,29 +59,13 @@ function Post() {
       navigate('/');
     }
 
-
-    const editPost = (option) => {
-      if (option === "title") {
-        let newTitle = prompt("Entrez un nouveau titre")
-        axios.put(`http://localhost:3001/posts/title`, {newTitle: newTitle, id: id}, {headers: {accessToken: localStorage.getItem('accessToken')}});
-        setPostObject({...postObject, title: newTitle})
-      }
-      else {
-        let newPostText = prompt("Entrez un nouveau texte")
-        axios.put(`http://localhost:3001/posts/postText`, {newText: newPostText, id: id}, {headers: {accessToken: localStorage.getItem('accessToken')}});
-        setPostObject({...postObject, postText: newPostText})
-      }
-    }
-
   return (
     <div>
         <div className='postPage'>
           <div className='leftSide'>
             <div className='post' id='individual'>
-              <div className='title'>{postObject.title} {(authState.username === postObject.username) && <EditIcon className='icone-modif' onClick={() => {navigate(`/post/${id}`)}}/>
-              || (authState.username === "Admin") && <EditIcon className='icone-modif' onClick={() => {navigate(`/changepost/${id}`)}}/>}</div>
-              <div className='body'>{postObject.postText} {(authState.username === postObject.username) && <EditIcon className='icone-modif' onClick={() => {editPost("body");}}/>
-              || (authState.username === "Admin") && <EditIcon className='icone-modif' onClick={() => {editPost("body");}}/>}</div>
+              <div className='title'>{postObject.title}</div>
+              <div className='body'>{postObject.postText}</div>
                 <div className='image'><Image cloudName="prophessy" publicId={postObject.image}/></div>
               <div className='footer'>{postObject.username} {(authState.username === postObject.username) && (<div><button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button> <button onClick={() => {navigate(`/changepost/${id}`)}}>Modifier le post</button></div>) || (authState.username === "Admin") && (<div><button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button> <button onClick={() => {navigate(`/changepost/${id}`)}}>Modifier le post</button></div>)} </div>
             </div>
