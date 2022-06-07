@@ -193,7 +193,7 @@ a {
 /* INDIVIDUAL POST */
 .postPage {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 }
@@ -205,10 +205,8 @@ a {
   align-items: center;
 }
 
-.leftSide .icone-modif {
-  position: absolute;
-  margin-left: 10px;
-  margin-top: 10px;
+.leftSide button {
+  width: 180px;
 }
 
 .rightSide {
@@ -218,6 +216,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 30px;
 }
 
 .rightSide .addCommentContainer {
@@ -324,5 +323,14 @@ button {
   }
   .postPage {
     flex-direction: column;
+  }
+  .rightSide {
+    margin-top: 100px;
+  }
+  .listOfComments .comment {
+    width: 200px;
+  }
+  .loggedInContainer h1 {
+    display: none;
   }
 }

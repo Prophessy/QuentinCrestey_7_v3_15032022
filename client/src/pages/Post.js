@@ -66,7 +66,7 @@ function Post() {
             <div className='post' id='individual'>
               <div className='title'>{postObject.title}</div>
               <div className='body'>{postObject.postText}</div>
-                <div className='image'><Image cloudName="prophessy" publicId={postObject.image}/></div>
+              <div className='image'><Image cloudName="prophessy" publicId={postObject.image}/></div>
               <div className='footer'>{postObject.username} {(authState.username === postObject.username) && (<div><button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button> <button onClick={() => {navigate(`/changepost/${id}`)}}>Modifier le post</button></div>) || (authState.username === "Admin") && (<div><button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button> <button onClick={() => {navigate(`/changepost/${id}`)}}>Modifier le post</button></div>)} </div>
             </div>
           </div>
