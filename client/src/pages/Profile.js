@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import {useParams, useNavigate} from "react-router-dom";
 import axios from 'axios';
 import { AuthContext } from '../helpers/AuthContext'
+import { Image } from 'cloudinary-react'
 
 function Profile() {
 
@@ -33,6 +34,7 @@ function Profile() {
             <div className='post'  key={key}>
             <div className='title'> { value.title } </div>
             <div className='body' onClick={() => {navigate(`/post/${value.id}`)}}> { value.postText } </div>
+            <div className='image'><Image cloudName="prophessy" publicId={value.image}/></div>
             <div className='footer'> 
                 <div className='username'>{ value.username }</div>
                 <div className='buttons'><label> {value.Likes.length} </label></div>

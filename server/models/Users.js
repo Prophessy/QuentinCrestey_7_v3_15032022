@@ -10,10 +10,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        right: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-        },
     });
 
     Users.associate = (models) => {

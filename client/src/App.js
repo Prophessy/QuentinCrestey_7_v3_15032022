@@ -11,6 +11,7 @@ import PageNotFound from "./pages/PageNotFound"
 import Profile from "./pages/Profile"
 import ChangePassword from "./pages/ChangePassword"
 import ChangePost from "./pages/ChangePost"
+import Logo from "./logo/icon-left-font-monochrome-white.png"
 import { AuthContext } from "./helpers/AuthContext";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -56,6 +57,7 @@ function App() {
                 </>
               )}
             </div>
+            <img src={Logo} alt="Logo"/>
             <div className="loggedInContainer">
               <h1>{authState.username} </h1>
               {authState.status && <button onClick={logout}> Deconnexion</button>}

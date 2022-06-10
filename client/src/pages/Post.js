@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../helpers/AuthContext'
 import { Image } from 'cloudinary-react'
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 function Post() {
     const navigate = useNavigate();
@@ -67,7 +69,7 @@ function Post() {
               <div className='title'>{postObject.title}</div>
               <div className='body'>{postObject.postText}</div>
               <div className='image'><Image cloudName="prophessy" publicId={postObject.image}/></div>
-              <div className='footer'>{postObject.username} {(authState.username === postObject.username) && (<div><button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button> <button onClick={() => {navigate(`/changepost/${id}`)}}>Modifier le post</button></div>) || (authState.username === "Admin") && (<div><button onClick={() => {deletePost(postObject.id)}}>Supprimer le post</button> <button onClick={() => {navigate(`/changepost/${id}`)}}>Modifier le post</button></div>)} </div>
+              <div className='footer'>{postObject.username} {(authState.username === postObject.username) && (<div><DeleteIcon onClick={() => {deletePost(postObject.id)}} /> <EditIcon onClick={() => {navigate(`/changepost/${id}`)}} /></div>) || (authState.username === "Admin") && (<div><DeleteIcon onClick={() => {deletePost(postObject.id)}} /> <EditIcon onClick={() => {navigate(`/changepost/${id}`)}} /></div>)} </div>
             </div>
           </div>
           <div className='rightSide'>
@@ -80,7 +82,7 @@ function Post() {
                 return (
                 <div className='comment' key={key}> { comment.commentBody } 
                   <label><br></br><br></br>Auteur: {comment.username}</label>
-                  {authState.username === comment.username && (<button onClick={() => {deleteComment(comment.id)}}> Supprimer </button>)  || authState.username === "Admin" && (<button onClick={() => {deleteComment(comment.id)}}> Supprimer </button>)}
+                  &nbsp;{authState.username === comment.username && (<DeleteIcon onClick={() => {deleteComment(comment.id)}} />)  || authState.username === "Admin" && (<DeleteIcon onClick={() => {deleteComment(comment.id)}} />)}
                 </div>
                 );
               })}
