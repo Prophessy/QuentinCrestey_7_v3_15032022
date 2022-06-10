@@ -18,7 +18,7 @@ import axios from 'axios';
 
 function App() {
 
-  const [authState, setAuthState] = useState({username: "", id: 0, status: false, right: 0});
+  const [authState, setAuthState] = useState({username: "", id: 0, status: false});
 
   useEffect(() => {
 
@@ -29,7 +29,7 @@ function App() {
         setAuthState({...authState, status: false});
       } 
       else {
-        setAuthState({username: response.data.username, id: response.data.id, status: true, right: response.data.right});
+        setAuthState({username: response.data.username, id: response.data.id, status: true});
       }
     });
   }, []);
