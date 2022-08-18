@@ -1,7 +1,27 @@
-Connectez l'api à votre base de donnée,
+Technologies utilisées :
 
-Pour lancer l'api entrez dans le backend (cd server) puis faite un npm start
+Front-end:
 
-Pareil pour le frontend (cd client), puis npm start
+ - React
+ - Axios
+ - Formik
+ - Yup
+ - Material-ui
 
-Les dépendances à installer sont visibles dans les fichers package.json 
+Back-end:
+
+ - Node.js
+ - MySQL
+ - Sequelize
+ - Express
+ - Bcrypt
+ - JsonWebToken
+ 
+ Fonctionnalitées :
+ 
+ - Création de compte / Connexion
+ - Création et affichage de post comprenant un titre, une description et une image
+ - Système de maintenance de connexion 
+ - Vérification utilisateur pour suppression et modification de post et de commentaire
+ - Compte administrateur 
+ - Système de "profil" regroupant les posts de l'utilisateur sélectionné.
