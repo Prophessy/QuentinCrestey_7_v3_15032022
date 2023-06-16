@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Crée une racine de rendu ReactDOM attachée à l'élément HTML avec l'ID 'root'
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// Rend l'application React dans la racine de rendu
 root.render(
+  // Utilise le mode strict de React pour détecter les problèmes potentiels dans le code
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// Appelle la fonction reportWebVitals pour mesurer les performances de l'application
 reportWebVitals();

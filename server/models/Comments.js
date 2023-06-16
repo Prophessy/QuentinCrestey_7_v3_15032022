@@ -1,16 +1,18 @@
-//Création des données comments avec sequilize
-
 module.exports = (sequelize, DataTypes) => {
-    const Comments = sequelize.define("Comments", {
-      commentBody: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      }
-    });
-  
-    return Comments;
-  };
+  // Définition du modèle Comments
+  const Comments = sequelize.define("Comments", {
+    // Champ commentBody représentant le corps du commentaire
+    commentBody: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    // Champ username représentant le nom d'utilisateur associé au commentaire
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
+  });
+
+  // Retourne le modèle Comments
+  return Comments;
+};
